@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Bharatiya Gyan — Indian Knowledge System</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --saffron: #E8642A;
+    --gold: #C9881C;
+    --deep: #1A0E00;
+    --cream: #FAF5EC;
+    --muted: #6B5A3E;
+    --card-bg: #FFFDF7;
+    --border: rgba(200,140,40,0.2);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--deep);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(250,245,236,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem; height: 64px;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 700;
+    color: var(--saffron);
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; font-size: 0.88rem; font-weight: 500;
+    color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--saffron); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    position: relative;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(232,100,42,0.08) 0%, transparent 70%),
+      var(--cream);
+  }
+  .hero-om {
+    font-size: 5rem; line-height: 1;
+    color: var(--saffron); opacity: 0.15;
+    position: absolute; top: 6rem; right: 3rem;
+    font-family: serif;
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+  .hero-tag {
+    font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); font-weight: 500;
+    border: 1px solid var(--gold); border-radius: 2rem;
+    padding: 0.35rem 1rem; margin-bottom: 1.5rem; display: inline-block;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 900; line-height: 1.1;
+    margin-bottom: 1.25rem;
+  }
+  .hero h1 span { color: var(--saffron); }
+  .hero p {
+    font-size: 1.1rem; color: var(--muted);
+    max-width: 540px; line-height: 1.75; margin-bottom: 2.5rem;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+  .btn-primary {
+    background: var(--saffron); color: #fff;
+    border: none; padding: 0.85rem 2rem;
+    border-radius: 3rem; font-size: 0.95rem; font-weight: 500;
+    cursor: pointer; text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,100,42,0.3); }
+  .btn-outline {
+    background: transparent; color: var(--saffron);
+    border: 1.5px solid var(--saffron); padding: 0.85rem 2rem;
+    border-radius: 3rem; font-size: 0.95rem; font-weight: 500;
+    cursor: pointer; text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .btn-outline:hover { background: var(--saffron); color: #fff; }
+  .hero-divider {
+    width: 80px; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 3rem auto 0;
+  }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; }
+  .section-label {
+    font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); font-weight: 500; margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700; margin-bottom: 1rem;
+  }
+  .section-sub {
+    color: var(--muted); font-size: 1rem; line-height: 1.7;
+    max-width: 540px;
+  }
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  /* ABOUT */
+  #about { background: #fff; }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  }
+  .about-visual {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  }
+  .about-card {
+    background: var(--cream); border: 1px solid var(--border);
+    border-radius: 1rem; padding: 1.5rem; text-align: center;
+  }
+  .about-card .icon { font-size: 2rem; margin-bottom: 0.6rem; }
+  .about-card h4 { font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: 0.3rem; }
+  .about-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+  .about-card.featured {
+    grid-column: span 2; background: var(--saffron); color: #fff;
+  }
+  .about-card.featured p { color: rgba(255,255,255,0.85); }
+
+  /* TOPICS GRID */
+  #topics { background: var(--cream); }
+  .topics-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .topic-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 1.25rem; padding: 2rem;
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .topic-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--saffron);
+    border-radius: 4px 0 0 4px;
+  }
+  .topic-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.07); }
+  .topic-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+  .topic-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem; margin-bottom: 0.6rem;
+  }
+  .topic-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
+  .topic-tag {
+    display: inline-block; margin-top: 1rem;
+    font-size: 0.75rem; color: var(--gold); letter-spacing: 0.08em;
+    text-transform: uppercase; font-weight: 500;
+  }
+
+  /* TIMELINE */
+  #timeline { background: #fff; }
+  .timeline { margin-top: 3rem; position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 7px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(to bottom, var(--saffron), var(--gold), transparent);
+  }
+  .timeline-item { position: relative; margin-bottom: 2.5rem; padding-left: 1.5rem; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -1.85rem; top: 6px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--saffron); border: 2px solid var(--cream);
+  }
+  .timeline-item h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; margin-bottom: 0.3rem;
+  }
+  .timeline-item .era {
+    font-size: 0.78rem; color: var(--gold); font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem;
+  }
+  .timeline-item p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+
+  /* CONTRIBUTIONS */
+  #contributions { background: var(--cream); }
+  .contrib-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .contrib-card {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 1rem; padding: 1.5rem; text-align: center;
+  }
+  .contrib-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem; font-weight: 900; color: var(--saffron); line-height: 1;
+  }
+  .contrib-card h4 { font-weight: 500; margin: 0.5rem 0 0.4rem; font-size: 1rem; }
+  .contrib-card p { font-size: 0.83rem; color: var(--muted); line-height: 1.55; }
+
+  /* FOOTER */
+  footer {
+    background: var(--deep); color: rgba(255,255,255,0.5);
+    text-align: center; padding: 2rem;
+    font-size: 0.85rem;
+  }
+  footer strong { color: var(--gold); }
+
+  /* FADE IN */
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 700px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .about-visual { grid-template-columns: 1fr; }
+    .about-card.featured { grid-column: span 1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">&#x0950; Bharatiya Gyan</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#topics">Topics</a></li>
+    <li><a href="#timeline">History</a></li>
+    <li><a href="#contributions">Contributions</a></li>
+
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-om">ॐ</div>
+  <div class="hero-tag">Indian Knowledge System — B.Tech Project</div>
+  <h1>The Ancient Wisdom<br>of <span>Bharat</span></h1>
+  <p>Exploring India's timeless contributions to science, philosophy, art, medicine, mathematics, and culture — a civilisation 5,000 years in the making.</p>
+  <div class="hero-btns">
+    <a href="#topics" class="btn-primary">Explore Topics</a>
+
+  </div>
+  <div class="hero-divider"></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid fade-in">
+      <div>
+        <div class="section-label">What is IKS?</div>
+        <h2 class="section-title">India's Living Intellectual Heritage</h2>
+        <p class="section-sub">Indian Knowledge System (IKS) refers to the vast body of knowledge developed on the Indian subcontinent over millennia — spanning science, mathematics, medicine, philosophy, arts, architecture, and governance.</p>
+        <br/>
+        <p class="section-sub">From the concept of zero to the discovery of gravity, from Ayurveda to Yoga — India's contributions have shaped the entire world. This project aims to bring that knowledge alive for the modern generation.</p>
+      </div>
+      <div class="about-visual">
+        <div class="about-card">
+          <div class="icon">📜</div>
+          <h4>Vedas & Upanishads</h4>
+          <p>World's oldest body of spiritual and philosophical texts</p>
+        </div>
+        <div class="about-card">
+          <div class="icon">🔬</div>
+          <h4>Ancient Science</h4>
+          <p>Astronomy, metallurgy, surgery — centuries ahead of time</p>
+        </div>
+        <div class="about-card featured">
+          <div class="icon">🌍</div>
+          <h4>Global Influence</h4>
+          <p>India's knowledge systems shaped Arab, Greek, Chinese, and European civilisations across history</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOPICS -->
+<section id="topics">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-label">Knowledge Domains</div>
+      <h2 class="section-title">Core Topics We Cover</h2>
+    </div>
+    <div class="topics-grid">
+      <div class="topic-card fade-in">
+        <div class="topic-icon">🔢</div>
+        <h3>Vedic Mathematics</h3>
+        <p>Ancient calculation techniques — zero, decimal system, algebra, and sutras that make complex maths simple. Aryabhata and Brahmagupta changed the mathematical world forever.</p>
+        <span class="topic-tag">Mathematics & Astronomy</span>
+      </div>
+      <div class="topic-card fade-in">
+        <div class="topic-icon">🌿</div>
+        <h3>Ayurveda</h3>
+        <p>The 5,000-year-old science of life. Charaka Samhita and Sushruta Samhita describe medicines, surgeries, and holistic health practices still relevant today.</p>
+        <span class="topic-tag">Medicine & Wellness</span>
+      </div>
+      <div class="topic-card fade-in">
+        <div class="topic-icon">🧘</div>
+        <h3>Yoga & Meditation</h3>
+        <p>From Patanjali's Yoga Sutras to modern mindfulness — India gave the world its most profound system for physical, mental, and spiritual well-being.</p>
+        <span class="topic-tag">Wellness & Philosophy</span>
+      </div>
+      <div class="topic-card fade-in">
+        <div class="topic-icon">🎭</div>
+        <h3>Classical Arts</h3>
+        <p>Bharatanatyam, Kathak, Carnatic music, Raga system — India's performing arts encode philosophy, emotion, and cosmic order in every movement and note.</p>
+        <span class="topic-tag">Art & Culture</span>
+      </div>
+      <div class="topic-card fade-in">
+        <div class="topic-icon">🏛️</div>
+        <h3>Architecture</h3>
+        <p>Vastu Shastra, Dravidian and Nagara temples, stepwells (Vav), and the Indus Valley's planned cities — ancient Indian architecture continues to astonish engineers.</p>
+        <span class="topic-tag">Architecture & Design</span>
+      </div>
+      <div class="topic-card fade-in">
+        <div class="topic-icon">⚗️</div>
+        <h3>Metallurgy & Chemistry</h3>
+        <p>The Iron Pillar of Delhi that hasn't rusted in 1,600 years. Zinc smelting, wootz steel, Rasa Shastra — India's material science was unparalleled in the ancient world.</p>
+        <span class="topic-tag">Science & Technology</span>
+      </div>
+      <div class="topic-card fade-in">
+        <div class="topic-icon">🌌</div>
+        <h3>Astronomy & Cosmology</h3>
+        <p>Aryabhata knew the Earth rotated on its axis. Vedic texts described heliocentric models. Ancient Indian observatories (Jantar Mantar) tracked stars with precision.</p>
+        <span class="topic-tag">Astronomy</span>
+      </div>
+      <div class="topic-card fade-in">
+        <div class="topic-icon">📚</div>
+        <h3>Philosophy & Logic</h3>
+        <p>Nyaya, Vaisheshika, Samkhya, Vedanta — Indian philosophical schools developed rigorous systems of logic, epistemology, and metaphysics thousands of years ago.</p>
+        <span class="topic-tag">Philosophy</span>
+      </div>
+      <div class="topic-card fade-in">
+        <div class="topic-icon">⚖️</div>
+        <h3>Governance & Economics</h3>
+        <p>Kautilya's Arthashastra — a 2,400-year-old masterpiece on statecraft, economics, law, and administration that rivals Machiavelli and modern political science.</p>
+        <span class="topic-tag">Governance</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-label">Historical Journey</div>
+      <h2 class="section-title">Timeline of Indian Knowledge</h2>
+      <p class="section-sub">A civilisation that never stopped thinking, discovering, and creating.</p>
+    </div>
+    <div class="timeline fade-in">
+      <div class="timeline-item">
+        <div class="era">3300 BCE – 1300 BCE</div>
+        <h4>Indus Valley Civilisation</h4>
+        <p>Planned cities (Mohenjo-daro, Harappa), advanced drainage systems, standardised weights & measures, and proto-writing. World's first urban planning.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="era">1500 BCE – 500 BCE</div>
+        <h4>Vedic Period</h4>
+        <p>Composition of the Vedas, Upanishads, and early mathematical texts (Sulbasutras). Panini writes Ashtadhyayi — the world's first formal grammar system.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="era">600 BCE – 200 CE</div>
+        <h4>Classical Period</h4>
+        <p>Rise of Buddhism and Jainism. Charaka writes Charaka Samhita (medicine). Kautilya writes Arthashastra. Sushruta performs rhinoplasty — the world's first surgery.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="era">320 CE – 550 CE</div>
+        <h4>Gupta Golden Age</h4>
+        <p>Aryabhata discovers zero and calculates pi. Varahamihira writes on astronomy. Nalanda University becomes the world's first university, attracting scholars from across Asia.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="era">600 CE – 1200 CE</div>
+        <h4>Medieval Achievements</h4>
+        <p>Brahmagupta's algebra. Bhaskara II's calculus concepts. Classical temple architecture at its peak. Indian numerals spread to Arabia and then Europe as "Arabic numerals."</p>
+      </div>
+      <div class="timeline-item">
+        <div class="era">1200 CE – Present</div>
+        <h4>Resilience & Revival</h4>
+        <p>Despite invasions and colonisation, India's knowledge traditions survived. Today, IKS is being systematically documented and integrated back into modern education and science.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTRIBUTIONS -->
+<section id="contributions">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-label">India's Global Impact</div>
+      <h2 class="section-title">Key Contributions to the World</h2>
+      <p class="section-sub">India didn't just develop knowledge — it shared it. These innovations changed human civilisation forever.</p>
+    </div>
+    <div class="contrib-grid fade-in">
+      <div class="contrib-card">
+        <div class="contrib-num">0</div>
+        <h4>Invention of Zero</h4>
+        <p>Aryabhata (499 CE) — without zero, modern computing, physics, and mathematics would be impossible.</p>
+      </div>
+      <div class="contrib-card">
+        <div class="contrib-num">π</div>
+        <h4>Value of Pi</h4>
+        <p>Aryabhata calculated pi to 4 decimal places — more accurate than any European mathematician of his era.</p>
+      </div>
+      <div class="contrib-card">
+        <div class="contrib-num">1st</div>
+        <h4>Surgery in History</h4>
+        <p>Sushruta (600 BCE) performed cataract surgery, plastic surgery, and documented 300+ surgical instruments.</p>
+      </div>
+      <div class="contrib-card">
+        <div class="contrib-num">10</div>
+        <h4>Decimal Number System</h4>
+        <p>India gave the world the base-10 number system — the foundation of all modern mathematics and science.</p>
+      </div>
+      <div class="contrib-card">
+        <div class="contrib-card">
+        <div class="contrib-num">∞</div>
+        <h4>Concept of Infinity</h4>
+        <p>Jain mathematicians (400 BCE) were the first to classify and work with different types of infinity.</p>
+      </div>
+      </div>
+      <div class="contrib-card">
+        <div class="contrib-num">UNESCO</div>
+        <h4>Yoga — World Heritage</h4>
+        <p>India's gift of Yoga is practiced by 300 million+ people worldwide and is a UNESCO Intangible Cultural Heritage.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <p>Made with ❤️ for <strong>Indian Knowledge System</strong> — B.Tech Project &nbsp;|&nbsp; &copy; 2025 Bharatiya Gyan</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
